@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<title>Titulo de la Pagina</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
+<body>
+        <style>
+                ul {
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+                    background-color: rgb(12, 10, 10);
+                }
+                
+                li {
+                    float: left;
+                }
+                
+                li a {
+                    display: block;
+                    color: rgb(55, 226, 21);
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+                }
+                
+                li a:hover:not(.active) {
+                    background-color: rgb(228, 237, 247);
+                }
+                
+                .active {
+                    background-color: rgb(88, 83, 83);
+                }
+                </style>
+               
+                
+                <ul>
+                <li><a href="/index">Home</a></li>
+                  <li><a href="/cromas">Colection</a></li>
+                  <li><a href="/logout">Salir</a></li>
+                 
+                  <li style="float:right"><a class="active" href="/login">Iniciar Sesion</a></li>
+                  <li style="float:right"><a class="active" href="/registro">Registrarte</a></li>
+                </ul>

@@ -1,0 +1,16 @@
+<%- include __header %>
+
+<form action="/login" method="POST">
+    <fieldset>
+      <legend>Registro de Usuarios:</legend>
+      Nombre de Usuario:<br>
+      <input type="text" name="username">
+      <br>
+      Contraseña:<br>
+      <input type="password" name="password" placeholder="Contraseña o que?">
+      <br><br>
+      <input type="submit" value="Aceptar">
+    </fieldset>
+  </form>
+
+  <%- include __footer %>

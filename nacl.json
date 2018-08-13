@@ -1,0 +1,70 @@
+[
+    {
+        "group": "Normal",
+        "permissions": [
+            {
+                "resource": "/login",
+                "methods": [
+                    "GET",
+                    "POST"
+                ],
+                "action": "allow"
+            },
+            {
+                "resource": "/index",
+                "methods": [
+                    "GET"
+                ],
+                "action": "allow"
+            },
+            {
+                "resource": "/registro",
+                "methods": [
+                    "GET",
+                    "POST"
+                ],
+                "action": "allow"
+            },
+            {
+                "resource": "/logout",
+                "methods": [
+                    "GET"
+                ],
+                "action": "allow"
+            },
+            {
+                "resource": "/my",
+                "methods": [
+                    "GET"
+                ],
+                "action": "allow"
+            },
+            {
+                "resource": "/addcroma",
+                "methods": [
+                    "GET"
+                ],
+                "action": "allow"
+            }
+            ,
+            {
+                "resource": "/cromas",
+                "methods": [
+                    "GET",
+                    "POST"
+                ],
+                "action": "allow"
+            }
+        ]
+    }, 
+    {
+        "group":"adm",
+        "permissions":[
+            {
+            "resource":"*",
+            "methods":"*",
+            "action":"allow"
+            }
+    ]
+    }
+]
