@@ -1,70 +1,54 @@
 [
     {
-        "group": "Normal",
+        "group": "admin",
         "permissions": [
             {
-                "resource": "/login",
-                "methods": [
-                    "GET",
-                    "POST"
-                ],
+                "resource": "*",
+                "methods": "*",
                 "action": "allow"
-            },
+            }
+        ]
+    },
+    {
+        "group": "normal",
+        "permissions": [
             {
-                "resource": "/index",
+                "resource": "/subiruser",
                 "methods": [
                     "GET"
                 ],
-                "action": "allow"
+                "action": "deny"
             },
             {
-                "resource": "/registro",
-                "methods": [
-                    "GET",
-                    "POST"
-                ],
+                "resource": "*",
+                "methods": "*",
                 "action": "allow"
-            },
+            }
+        ]
+    },
+    {
+        "group": "nohaynadie",
+        "permissions": [
             {
-                "resource": "/logout",
+                "resource": "/subiruser",
                 "methods": [
                     "GET"
                 ],
-                "action": "allow"
+                "action": "deny"
             },
             {
                 "resource": "/my",
                 "methods": [
                     "GET"
                 ],
-                "action": "allow"
+                "action": "deny"
             },
+            
             {
-                "resource": "/addcroma",
-                "methods": [
-                    "GET"
-                ],
-                "action": "allow"
-            }
-            ,
-            {
-                "resource": "/cromas",
-                "methods": [
-                    "GET",
-                    "POST"
-                ],
+                "resource": "*",
+                "methods": "*",
                 "action": "allow"
             }
         ]
-    }, 
-    {
-        "group":"adm",
-        "permissions":[
-            {
-            "resource":"*",
-            "methods":"*",
-            "action":"allow"
-            }
-    ]
     }
 ]

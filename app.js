@@ -15,7 +15,7 @@ var app = express();
  passportsetup();
 
 
-app.set('port',process.env.PORT || 3000);
+app.set('port',process.env.PORT || 3002);
 
 app.set('views',path.resolve(__dirname,'views'));
 app.set('view engine',"ejs");
@@ -32,6 +32,7 @@ app.use(flash());
 app.use(passport.initialize({
     userProperty:"usuarios"
 }));
+app.use(cookieParser())
 
 app.use(passport.session());
 

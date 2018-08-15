@@ -6,16 +6,45 @@ var passport = require('passport');
 var router = express.Router();
 var path = require('path');
 var acl = require('express-acl');
+var webshot = require('webshot');
+var percent = require("percent-value");
+var dataTime= require('date-time');
+var options = {
+    siteType: 'file',
+    streamType: 'png',
+    shotSize: {
+        width: 'all',
+        height: 'all'
+    }
+};
 
-/*acl.config({
-    baseUrl:'/',
-    defaultRole: 'Normal',
-    decodedObjectName:'usuarios', 
-    roleSearchPath: 'usuarios.rol'
+
+acl.config({
+    baseUrl: '/',
+    defaultRole: 'nohaynadie',
+    decodedObjectName: 'usuarios',
+    roleSearchPath: 'usuarios.role'
 });
 
-router.use(acl.authorize);*/
+router.use(acl.authorize);
+router.use((req, res, next) => {
+    res.locals.currentUsuarios = req.usuarios;
+    res.locals.message = "";
+    res.locals.errors = req.flash('error');
+    res.locals.infos = req.flash('info');
+    if (req.usuarios) {
+        req.session.role = req.usuarios.role;
+    } else {
+        req.session.role = 'nohaynadie';
+    }
+    console.log(req.session.role);
+    next();
+});
+router.get('/', (req, res, next) => {
 
+    res.render('login');
+
+});
 
 router.get('/cromas', (req, res, next) => {
     Croma.find()
@@ -25,54 +54,20 @@ router.get('/cromas', (req, res, next) => {
                 return next(err);
             }
             res.render('cromas', { kroma: kroma });
+            webshot("views/cromas.ejs", "cromas.png", options, (err) => {
+                console.log('no entra :c');
+                if (err) {
+                    return console.log(err);
+                }
+                console.log('Imagen hecha man');
+            });
         });
 });
-router.get('/my', (req, res, next) => {
-    relacion.find()
-        .sort({ usuario: 'ascending' })
-        .exec((err, croma) => {
-            if (err) {
-                return next(err);
-            }
-            res.render('my', { croma: croma });
-        });
-});
-router.use((req, res, next) => {
-    res.locals.currentUsuario = req.usuario;
-    res.locals.errors = req.flash('error');
-    res.locals.infos = req.flash('info');
-    if (req.usuario) {
-        req.session.role = req.usuario.rol;
 
-    } else {
-        req.session.role = 'Normal';
-    }
 
-    next();
-});
 router.get('/registro', (req, res, next) => {
     res.render('registro');
 });
-
-router.get('/login', (req, res, next) => {
-    res.render('login');
-});
-router.get('/index', (req, res, next) => {
-    res.render('index');
-});
-router.get('/', (req, res, next) => {
-});
-router.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/index');
-
-});
-router.get('/my', ensureAuthenticated, (req, res) => {
-    res.render('my');
-});
-
-
-
 router.get('/addcroma', (req, res) => {
     Croma.find()
         .sort({ imagen: 'ascending' })
@@ -80,16 +75,68 @@ router.get('/addcroma', (req, res) => {
             if (err) {
                 return next(err);
             }
-            res.render('addcroma', { kroma: kroma });
-            
+            res.render('addcroma', { kroma: kroma, });
         });
+
+
+});
+router.get('/subiruser', (req, res, next) => {
+    Usuarios.find({ role: "normal" })
+        .exec((err, user) => {
+            if (err) {
+                return next(err);
+            }
+            res.render('subiruser', { user: user, });
+            console.log(user);
+
+        });
+
+
 });
 
+router.get('/login', (req, res, next) => {
+    
 
+    res.render('login');
+
+});
+router.get('/index', (req, res, next) => {
+   
+    console.log(tiempo);
+    res.render('index',{tiempo: tiempo});
+});
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/index');
+
+});
+router.get('/my', ensureAuthenticated, (req, res) => {
+    relacion.find({ usuario: req.usuarios.usuario })
+        .sort({ imagen: 'ascending' })
+        .exec((err, croma) => {
+            if (err) {
+                return next(err);
+            }
+            var cont = 0;
+            var porcentaje;
+            croma.forEach((cromas) => {
+                cont++;
+            }
+            )
+            console.log(cont);
+            porcentaje = percent(cont).of(16);
+            console.log(porcentaje);
+            res.render('my', { croma: croma, porce: porcentaje });
+        });
+
+
+});
 router.post('/registro', (req, res, next) => {
     var usuariov = req.body.usuario;
     var password = req.body.password;
-    var role = 'Normal';
+    var email = req.body.email;
+    var role = 'normal';
 
 
 
@@ -104,20 +151,34 @@ router.post('/registro', (req, res, next) => {
         var newUsuario = new Usuarios({
             usuario: usuariov,
             password: password,
-            rol: role
+            email: email,
+            role: role
         });
         newUsuario.save(next);
         return res.redirect('/login')
     });
 });
+router.post('/subiruser', ensureAuthenticated, (req, res, next) => {
+    Usuarios.findOne({usuario: req.body.user}, function (err, usuact){
+       
+        usuact.role="admin";
+        usuact.save(next);
+
+
+    });
+    return res.redirect('/index')
+   
+});
 
 router.post('/addcroma', ensureAuthenticated, (req, res, next) => {
-    var usuariov = user;    
+
+    var usuariov = req.usuarios.usuario;
+
     var nombrev = req.body.nombre;
-    console.log(user);
     relacion.findOne({ nombre: nombrev, usuario: usuariov }, function (err, nombrecroma1) {
         if (nombrecroma1 == null) {
             Croma.findOne({ nombre: req.body.nombre }, function (err, nombrecroma) {
+
                 var imagenv = nombrecroma.imagen;
                 var rarezav = nombrecroma.rareza;
                 var newRelacion = new relacion({
@@ -127,6 +188,7 @@ router.post('/addcroma', ensureAuthenticated, (req, res, next) => {
                     rareza: rarezav
                 });
                 newRelacion.save(next);
+
             });
             return res.redirect('/my')
         }
@@ -144,8 +206,7 @@ function ensureAuthenticated(req, res, next) {
     }
 }
 router.post('/login', passport.authenticate('login', {
-    
-    successRedirect: '/addcroma',
+    successRedirect: '/cromas',
     failureRedirect: '/login',
     failureFlash: true
 }));

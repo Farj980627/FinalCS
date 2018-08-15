@@ -1,7 +1,26 @@
 <%- include __header %>
+<style>label{  
+    
+    color: rgb(9, 24, 6);
+    font-family: comic sans ms;
+    font-size: 30px;
+    }
+    #porce{
+        float:right;
+        color: darkblue;
+    }
+</style>
+
+<label> Cromas de <%- currentUsuarios.usuario %>. </label>
+   <label id="porce"> Porcentaje completado: <%- porce %>%</label>
+
+
 
 <% var x=0 %>
+<% var cont=0 %>
     <% croma.forEach((cromas)=>{%>
+        <% cont++ %>
+        <% console.log(cont) %>
         <%if (x==0){%>
         <div class="w3-row-padding w3-padding-16 w3-center" style="display: flex; ">
 

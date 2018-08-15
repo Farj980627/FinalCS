@@ -1,13 +1,11 @@
 <%- include __header %>
  
-
+<!--
     <form action="/addcroma" method="POST">
     
     <fieldset>
      <legend>Agrega un Croma</legend>
-      Nombre de Usuario:<br>
-      <input type="text" name="usuario">
-      <br>
+     
       Nombre del Croma:<br>      
          <select name="nombre">
           <% kroma.forEach((kromas)=>{%>
@@ -19,7 +17,67 @@
       <input type="submit" value="Aceptar">
     </fieldset> 
     
-    </form>
+    </form>-->
+    <style>
+      input[type=text], select {
+        width: 75%;
+        padding: 12px 20px;
+        margin-left: 12%;
+        margin-right: 10%;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 2%;
+        margin-top: 1%;
+      }
+      div { 
+    
+  border-radius: 5px;
+  background-color: #b3b3ff;
+  padding: 20px;
+}
+      input[type=submit] {
+        width: 50%;
+      background-color: #000000;
+      color: white;
+      padding: 14px 20px;
+      margin-left: 25%;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      padding-block-start:5px; 
+      }
+     
+      
+      div {
+          border-radius: 5px;
+          background-color:  #b3b3ff;
+          padding: 20px;
+      }
+      label{
+  margin-left:13%;
+  margin-right:13%;
+  color: rgb(9, 24, 6);
+  font-family: comic sans ms;
+  font-size: 150%;
+  }
+      </style>
+      <div>
+        <form action="addcroma" method="POST">
+        
+      
+          <label for="croma">A quien deseas agregar a tu coleccion?:</label>
+          <select id="croma" name="nombre">
+            <% kroma.forEach((kromas)=>{%>
+              <option value="<%=kromas.nombre%>"><%=kromas.nombre%> </option>
+              <%})%>
+          </select>
+        
+          <input type="submit" value="Agregar">
+        </form>
+      </div>
+      
 
 
   

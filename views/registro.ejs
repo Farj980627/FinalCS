@@ -1,17 +1,83 @@
 <%- include __header %>
 
-<form action="/registro" method="POST">
-    <fieldset>
-      <legend>Registro de Usuarios:</legend>
-      Nombre de Usuario:<br>
-      <input type="text" name="usuario">
-      <br>
-      Contraseña:<br>
-      <input type="password" name="password" placeholder="Contraseña o que?">
-      <br><br>
+<style>
+  input[type=text], select {
+      width: 75%;
+      padding: 12px 20px;
+      margin-left: 12%;
+      margin-right: 10%;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+  input[type=email], select {
+      width: 75%;
+      padding: 12px 20px;
+      margin-left: 12%;
+      margin-right: 10%;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+  input[type=password], select {
+      width: 75%;
+      padding: 12px 20px;
+      margin-left: 12%;
+      margin-right: 10%;
+      margin-bottom: 5%;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    
+      width: 50%;
+      background-color: #000000;
+      color: white;
+      padding: 14px 20px;
+      margin-left: 25%;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      padding-block-start:5px; 
+  }
+  
+  
+  
+  div {
+  
+    
+      border-radius: 5px;
+      background-color: #b3b3ff;
+      padding: 20px;
+  }
+  label{
+  margin-left:13%;
+  margin-right:13%;
+  color: rgb(9, 24, 6);
+  font-family: comic sans ms;
+  font-size: 150%;
+  }
+  </style>
+  <body>
+  
+  <div>
+    <form action="/registro" method="POST">
+      <label for="fname">Nombre de Usuario:</label>
+      <input type="text"  name="usuario" >
+      <label for="fname">E-Mail:</label>
+      <input type="email"  name="email" >
+  
+      <label for="lname">Contraseña:</label>
+      <input type="password"  name="password" >    
+    
       <input type="submit" value="Aceptar">
-    </fieldset>
-  </form>
+    </form>
+  </div>
 
   <%- include __footer %>
 

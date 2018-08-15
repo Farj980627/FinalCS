@@ -1,6 +1,52 @@
 <%- include __header %>
-<p> Bienvenido a la gloria de las waifus man</p>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        margin: 0;
+        font-family: Arial;
+        font-size: 17px;
+    }
+    #time{
+        font-family: cursive;
+        font-size: 11px;
+        background: rgba(62, 51, 168, 0.644); 
 
+    }
+    
+    .container {
+        position: relative;
+        max-width: 100%;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .container img {vertical-align: middle;}
+    
+    .container .content {
+        position: absolute;
+        bottom: 0;
+        background: rgba(62, 51, 168, 0.644); /* Black background with transparency */
+        color: #000000;
+        width: 100%;
+        padding: 20px;
+    }
+    </style>
 
+<div class="container">
+    <img src="/public/paisaje.jpg" alt="Notebook" style="width:100%;">
+    <div class="content">
+      <h1>Bienvenido :3</h1>
+      <p>Lorem ipsum dolor sit amet, an his etiam torquatos. Tollit soleat phaedrum te duo, eum cu recteque expetendis neglegentur. Cu mentitum maiestatis persequeris pro, pri ponderum tractatos ei.</p>
+    </div>
+  </div>
+  <div id="time">
+      <label>Hora y Fecha: <%- tiempo %></label>
+  </div>
 
 <%- include __footer %>

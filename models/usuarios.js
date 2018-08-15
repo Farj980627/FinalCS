@@ -6,7 +6,8 @@ var SALT_FACT = 10;
 var usuarioSchema = mongoose.Schema({
     usuario:{type:String,required:true,unique:true},
     password:{type:String,required:true},
-    rol:{type:String}
+    email:{type:String, required:true},
+    role:{type:String}
 });
 var donothing = () =>{
 
